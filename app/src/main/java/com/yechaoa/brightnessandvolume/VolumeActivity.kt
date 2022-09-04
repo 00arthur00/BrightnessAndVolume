@@ -58,6 +58,7 @@ class VolumeActivity : AppCompatActivity() {
         //获取媒体音量最大值
         mMaxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
+
         seekBar.max = mMaxVolume
         tv_max.text = "最大音量：$mMaxVolume"
 
@@ -69,6 +70,7 @@ class VolumeActivity : AppCompatActivity() {
         btn_mode.setOnClickListener {
             mAudioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
             tv_mode.text = "当前音量模式：正常"
+            this.setStreamVolume(0)
         }
 
         btn_add.setOnClickListener {
@@ -131,7 +133,17 @@ class VolumeActivity : AppCompatActivity() {
      *      AudioManager.FLAG_PLAY_SOUND 调整音量时播放声音
      */
     private fun setStreamVolume(volume: Int) {
-        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI)
+        val streamTypeList = ArrayList<Int>()
+        streamTypeList.add(AudioManager.STREAM_MUSIC)
+        streamTypeList.add(AudioManager.STREAM_VOICE_CALL)
+        streamTypeList.add(AudioManager.STREAM_SYSTEM)
+        streamTypeList.add(AudioManager.STREAM_RING)
+        streamTypeList.add(AudioManager.STREAM_MUSIC)
+        streamTypeList.add(AudioManager.STREAM_ALARM)
+        streamTypeList.add(AudioManager.STREAM_NOTIFICATION)
+        for (s in streamTypeList) {
+            mAudioManager.setStreamVolume(s, mAudioManager.getStreamMaxVolume(s), AudioManager.FLAG_SHOW_UI)
+        }
     }
 
     /**

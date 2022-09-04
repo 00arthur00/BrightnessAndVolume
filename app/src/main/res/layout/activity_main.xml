@@ -12,13 +12,23 @@
         android:id="@+id/btn_brightness"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="修改亮度" />
+        android:text="修改亮度"
+        android:visibility="invisible"
+        tools:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btn_reset_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="重置音量和模式" />
 
     <Button
         android:id="@+id/btn_volume"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="修改音量" />
+        android:text="修改音量"
+        android:visibility="invisible"
+        tools:visibility="invisible" />
 
 </LinearLayout>
